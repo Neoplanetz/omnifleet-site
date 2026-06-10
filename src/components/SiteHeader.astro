@@ -8,6 +8,7 @@ interface Props {
 const { locale, dict } = Astro.props;
 const homeHref = locale === 'ko' ? '/' : '/en/';
 const langHref = locale === 'ko' ? '/en/' : '/';
+const otherLocale = locale === 'ko' ? 'en' : 'ko';
 const mailHref = `mailto:ketimoro@gmail.com?subject=${encodeURIComponent(dict.cta.mailSubject)}`;
 ---
 
@@ -23,6 +24,8 @@ const mailHref = `mailto:ketimoro@gmail.com?subject=${encodeURIComponent(dict.ct
     <nav class="flex items-center gap-3">
       <a
         href={langHref}
+        lang={otherLocale}
+        hreflang={otherLocale}
         aria-label={dict.nav.langLabel}
         class="rounded-full border border-line px-3 py-1.5 font-mono text-xs text-body transition-colors hover:border-body hover:text-bright"
       >

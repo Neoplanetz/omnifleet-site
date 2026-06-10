@@ -8,7 +8,7 @@ const { dict } = Astro.props;
 ---
 
 <section id="hero" class="relative h-screen motion-safe:h-[200vh]">
-  <div class="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
+  <div class="sticky top-0 flex h-svh items-center justify-center overflow-hidden">
     <div
       id="hero-media"
       class="absolute inset-0 overflow-hidden border border-transparent will-change-transform"
@@ -20,7 +20,7 @@ const { dict } = Astro.props;
         muted
         loop
         playsinline
-        preload="auto"
+        preload="metadata"
       >
         <source src="/videos/hero.webm" type="video/webm" />
         <source src="/videos/hero.mp4" type="video/mp4" />
@@ -36,7 +36,7 @@ const { dict } = Astro.props;
       <p class="mx-auto mt-8 max-w-2xl text-lg leading-relaxed sm:text-xl">{dict.hero.sub}</p>
     </div>
 
-    <div class="absolute inset-x-0 bottom-10 mx-auto flex w-fit flex-col items-center gap-3">
+    <div id="hero-hint" class="absolute inset-x-0 bottom-10 mx-auto flex w-fit flex-col items-center gap-3">
       <span class="font-mono text-[10px] tracking-[0.3em] uppercase">{dict.hero.scrollHint}</span>
       <span class="scroll-line"></span>
     </div>
@@ -54,12 +54,13 @@ const { dict } = Astro.props;
     const tl = gsap.timeline({
       scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom bottom', scrub: 0.6 },
     });
-    tl.to('#hero-copy', { autoAlpha: 0, y: -40, duration: 0.35 }, 0).to(
+    tl.to(['#hero-copy', '#hero-hint'], { autoAlpha: 0, y: -40, duration: 0.35 }, 0).to(
       '#hero-media',
       {
         scale: 0.78,
-        borderRadius: 24,
-        borderColor: '#1e2633',
+        // 20px = 1.25rem, matches .device-frame radius for the Task-6 handoff
+        borderRadius: 20,
+        borderColor: '#1e2633', // = --color-line
         boxShadow: '0 40px 120px rgb(0 0 0 / 0.6)',
         duration: 1,
       },

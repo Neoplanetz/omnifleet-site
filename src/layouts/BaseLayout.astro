@@ -56,7 +56,12 @@ const path = locale === 'en' ? '/en/' : '/';
       // poster (+ preload="metadata" or "none"), and MUST NOT set the autoplay
       // attribute — this observer owns playback, and autoplay would start frames
       // before the reduced-motion pause lands (breaking the poster guarantee).
-      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+      let reduced = reducedMotion.matches;
+      reducedMotion.addEventListener('change', () => {
+        reduced = reducedMotion.matches;
+        if (reduced) document.querySelectorAll<HTMLVideoElement>('video[data-managed]').forEach((v) => v.pause());
+      });
       const videoObserver = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {

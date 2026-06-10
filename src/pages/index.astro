@@ -4,13 +4,14 @@ import { ko } from '../i18n';
 import Hero from '../components/Hero.astro';
 import ShowcaseScroller from '../components/ShowcaseScroller.astro';
 import StatStrip from '../components/StatStrip.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
 ---
 
 <BaseLayout locale="ko" dict={ko}>
   <Hero dict={ko} />
   <ShowcaseScroller dict={ko} />
   <StatStrip dict={ko} />
-  {/* Task 8: <FeatureGrid dict={ko} /> */}
+  <FeatureGrid dict={ko} />
   {/* Task 9: <Environment dict={ko} /> */}
   {/* Task 10: <CtaFooter dict={ko} /> */}
 </BaseLayout>

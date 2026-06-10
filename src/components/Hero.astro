@@ -1,0 +1,69 @@
+---
+import type { Dict } from '../i18n';
+
+interface Props {
+  dict: Dict;
+}
+const { dict } = Astro.props;
+---
+
+<section id="hero" class="relative h-screen motion-safe:h-[200vh]">
+  <div class="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
+    <div
+      id="hero-media"
+      class="absolute inset-0 overflow-hidden border border-transparent will-change-transform"
+    >
+      <video
+        data-managed
+        class="h-full w-full object-cover"
+        poster="/posters/hero.jpg"
+        muted
+        loop
+        playsinline
+        preload="auto"
+      >
+        <source src="/videos/hero.webm" type="video/webm" />
+        <source src="/videos/hero.mp4" type="video/mp4" />
+      </video>
+      <div class="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/30 to-ink/80"></div>
+    </div>
+
+    <div id="hero-copy" class="relative z-10 mx-auto max-w-4xl px-6 text-center">
+      <p class="font-mono text-xs tracking-[0.35em] text-accent uppercase sm:text-sm">{dict.hero.eyebrow}</p>
+      <h1 class="mt-6 font-display text-5xl font-extrabold tracking-tight text-bright text-balance sm:text-7xl lg:text-8xl">
+        {dict.hero.title1}<br />{dict.hero.title2}
+      </h1>
+      <p class="mx-auto mt-8 max-w-2xl text-lg leading-relaxed sm:text-xl">{dict.hero.sub}</p>
+    </div>
+
+    <div class="absolute inset-x-0 bottom-10 mx-auto flex w-fit flex-col items-center gap-3">
+      <span class="font-mono text-[10px] tracking-[0.3em] uppercase">{dict.hero.scrollHint}</span>
+      <span class="scroll-line"></span>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const mm = gsap.matchMedia();
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
+    const tl = gsap.timeline({
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom bottom', scrub: 0.6 },
+    });
+    tl.to('#hero-copy', { autoAlpha: 0, y: -40, duration: 0.35 }, 0).to(
+      '#hero-media',
+      {
+        scale: 0.78,
+        borderRadius: 24,
+        borderColor: '#1e2633',
+        boxShadow: '0 40px 120px rgb(0 0 0 / 0.6)',
+        duration: 1,
+      },
+      0.05
+    );
+  });
+</script>

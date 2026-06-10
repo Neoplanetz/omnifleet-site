@@ -104,8 +104,17 @@ const features = dict.showcase.features.map((f, i) => ({ ...f, ...MEDIA[i] }));
         if (active) v.play().catch(() => {});
         else v.pause();
       });
+      prefetchNext(index);
     };
     const pauseAll = () => videos.forEach((v) => v.pause());
+    const prefetched = new Set<number>();
+    const prefetchNext = (index: number) => {
+      const next = videos.find((v) => Number(v.dataset.index) === index + 1);
+      if (next && !prefetched.has(index + 1)) {
+        prefetched.add(index + 1);
+        next.load();
+      }
+    };
 
     gsap.utils.toArray<HTMLElement>('.showcase-step').forEach((step) => {
       ScrollTrigger.create({

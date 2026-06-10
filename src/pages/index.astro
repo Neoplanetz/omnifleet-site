@@ -3,12 +3,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { ko } from '../i18n';
 import Hero from '../components/Hero.astro';
 import ShowcaseScroller from '../components/ShowcaseScroller.astro';
+import StatStrip from '../components/StatStrip.astro';
 ---
 
 <BaseLayout locale="ko" dict={ko}>
   <Hero dict={ko} />
   <ShowcaseScroller dict={ko} />
-  {/* Task 7: <StatStrip dict={ko} /> */}
+  <StatStrip dict={ko} />
   {/* Task 8: <FeatureGrid dict={ko} /> */}
   {/* Task 9: <Environment dict={ko} /> */}
   {/* Task 10: <CtaFooter dict={ko} /> */}

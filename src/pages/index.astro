@@ -1,14 +1,13 @@
 ---
-import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { ko } from '../i18n';
 ---
-<!doctype html>
-<html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Omnifleet</title>
-  </head>
-  <body class="bg-ink font-sans text-body antialiased">
-    <h1 class="font-display p-10 text-4xl font-extrabold text-bright">OMNIFLEET scaffold OK</h1>
-  </body>
-</html>
+
+<BaseLayout locale="ko" dict={ko}>
+  {/* Task 5: <Hero dict={ko} /> */}
+  {/* Task 6: <ShowcaseScroller dict={ko} /> */}
+  {/* Task 7: <StatStrip dict={ko} /> */}
+  {/* Task 8: <FeatureGrid dict={ko} /> */}
+  {/* Task 9: <Environment dict={ko} /> */}
+  {/* Task 10: <CtaFooter dict={ko} /> */}
+</BaseLayout>

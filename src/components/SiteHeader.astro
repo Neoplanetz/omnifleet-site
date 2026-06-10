@@ -1,0 +1,39 @@
+---
+import type { Dict } from '../i18n';
+
+interface Props {
+  locale: 'ko' | 'en';
+  dict: Dict;
+}
+const { locale, dict } = Astro.props;
+const homeHref = locale === 'ko' ? '/' : '/en/';
+const langHref = locale === 'ko' ? '/en/' : '/';
+const mailHref = `mailto:ketimoro@gmail.com?subject=${encodeURIComponent(dict.cta.mailSubject)}`;
+---
+
+<header class="fixed inset-x-0 top-0 z-50 border-b border-line/50 bg-ink/65 backdrop-blur-md">
+  <div class="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
+    <a href={homeHref} class="flex items-center gap-2.5">
+      <span class="relative flex h-2.5 w-2.5">
+        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/60 motion-reduce:hidden"></span>
+        <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent"></span>
+      </span>
+      <span class="font-display text-sm font-bold tracking-[0.22em] text-bright">OMNIFLEET</span>
+    </a>
+    <nav class="flex items-center gap-3">
+      <a
+        href={langHref}
+        aria-label={dict.nav.langLabel}
+        class="rounded-full border border-line px-3 py-1.5 font-mono text-xs text-body transition-colors hover:border-body hover:text-bright"
+      >
+        {dict.nav.langToggle}
+      </a>
+      <a
+        href={mailHref}
+        class="rounded-full bg-accent px-4 py-1.5 text-xs font-semibold text-ink transition-shadow hover:shadow-[0_0_24px_rgb(34_211_238/0.45)]"
+      >
+        {dict.nav.contact}
+      </a>
+    </nav>
+  </div>
+</header>

@@ -8,7 +8,7 @@ interface Props {
   dict: Dict;
 }
 const { locale, dict } = Astro.props;
-const site = 'https://omnifleet.pages.dev';
+const site = (Astro.site?.href ?? 'https://omnifleet-site.pages.dev/').replace(/\/$/, '');
 const path = locale === 'en' ? '/en/' : '/';
 ---
 

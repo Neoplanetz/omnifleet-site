@@ -103,8 +103,8 @@ const features = dict.showcase.features.map((f, i) => ({ ...f, ...MEDIA[i] }));
         else v.pause();
       });
     };
+    const pauseAll = () => videos.forEach((v) => v.pause());
 
-    setActive(0);
     gsap.utils.toArray<HTMLElement>('.showcase-step').forEach((step) => {
       ScrollTrigger.create({
         trigger: step,
@@ -115,5 +115,33 @@ const features = dict.showcase.features.map((f, i) => ({ ...f, ...MEDIA[i] }));
         },
       });
     });
+
+    // Track-level guard: video may only play while the showcase is on screen.
+    // Owns the initial activation too (fires immediately when created in view).
+    ScrollTrigger.create({
+      trigger: '#showcase',
+      start: 'top bottom',
+      end: 'bottom top',
+      onEnter: () => setActive(0),
+      onEnterBack: () => {
+        const active = videos.find((v) => v.classList.contains('is-active'));
+        active?.play().catch(() => {});
+      },
+      onLeave: pauseAll,
+      onLeaveBack: () => {
+        // Reset the latch so re-entry from above starts at feature 0, then stop decoding.
+        setActive(0);
+        pauseAll();
+      },
+    });
+
+    // matchMedia cleanup: crossing below 1024px must not leave a hidden video decoding.
+    return () => {
+      captions.forEach((c) => c.classList.remove('is-active'));
+      videos.forEach((v) => {
+        v.classList.remove('is-active');
+        v.pause();
+      });
+    };
   });
 </script>

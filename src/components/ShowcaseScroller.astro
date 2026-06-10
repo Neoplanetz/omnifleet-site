@@ -1,0 +1,119 @@
+---
+import type { Dict } from '../i18n';
+
+interface Props {
+  dict: Dict;
+}
+const { dict } = Astro.props;
+
+const MEDIA = [
+  { id: 'map', poster: '/posters/map.jpg' },
+  { id: 'dashboard', poster: '/posters/dashboard.jpg' },
+  { id: 'control', poster: '/posters/control.jpg' },
+  { id: 'replay', poster: '/posters/replay.jpg' },
+] as const;
+
+const features = dict.showcase.features.map((f, i) => ({ ...f, ...MEDIA[i] }));
+---
+
+<section id="showcase" class="relative">
+  <!-- Desktop + motion-ok: sticky stage with index-driven crossfade -->
+  <div class="hidden lg:motion-safe:block">
+    <div class="relative" style={`height: ${features.length * 100}vh`}>
+      <div class="sticky top-0 flex h-svh items-center overflow-hidden">
+        <div class="mx-auto grid w-[min(92vw,1400px)] grid-cols-[minmax(0,2fr)_minmax(0,3fr)] items-center gap-12 px-6">
+          <div class="relative min-h-72">
+            {features.map((f, i) => (
+              <div class="showcase-caption absolute inset-0 flex flex-col justify-center" data-index={i}>
+                <p class="font-mono text-xs tracking-[0.3em] text-accent uppercase">{f.kicker}</p>
+                <h3 class="mt-4 font-display text-4xl font-bold text-bright text-balance">{f.title}</h3>
+                <p class="mt-4 text-lg leading-relaxed">{f.body}</p>
+              </div>
+            ))}
+          </div>
+          <div class="device-frame relative aspect-video w-full overflow-hidden">
+            {features.map((f, i) => (
+              <video
+                class="showcase-video absolute inset-0 h-full w-full object-cover"
+                data-index={i}
+                poster={f.poster}
+                muted
+                loop
+                playsinline
+                preload={i === 0 ? 'auto' : 'metadata'}
+              >
+                <source src={`/videos/${f.id}.webm`} type="video/webm" />
+                <source src={`/videos/${f.id}.mp4`} type="video/mp4" />
+              </video>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div class="pointer-events-none absolute inset-0">
+        {features.map((_, i) => (
+          <div class="showcase-step" data-index={i} style="height: 100vh"></div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile, or any reduced-motion environment: plain stacked sections -->
+  <div class="space-y-24 px-6 py-24 lg:motion-safe:hidden">
+    {features.map((f) => (
+      <div class="reveal mx-auto max-w-xl">
+        <p class="font-mono text-xs tracking-[0.3em] text-accent uppercase">{f.kicker}</p>
+        <h3 class="mt-3 font-display text-3xl font-bold text-bright text-balance">{f.title}</h3>
+        <p class="mt-3 leading-relaxed">{f.body}</p>
+        <div class="device-frame mt-6 aspect-video overflow-hidden">
+          <video
+            data-managed
+            class="h-full w-full object-cover"
+            poster={f.poster}
+            muted
+            loop
+            playsinline
+            preload="none"
+          >
+            <source src={`/videos/${f.id}.webm`} type="video/webm" />
+            <source src={`/videos/${f.id}.mp4`} type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const mm = gsap.matchMedia();
+  mm.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
+    const captions = gsap.utils.toArray<HTMLElement>('.showcase-caption');
+    const videos = gsap.utils.toArray<HTMLVideoElement>('.showcase-video');
+
+    const setActive = (index: number) => {
+      captions.forEach((c) => c.classList.toggle('is-active', Number(c.dataset.index) === index));
+      videos.forEach((v) => {
+        const active = Number(v.dataset.index) === index;
+        v.classList.toggle('is-active', active);
+        if (active) v.play().catch(() => {});
+        else v.pause();
+      });
+    };
+
+    setActive(0);
+    gsap.utils.toArray<HTMLElement>('.showcase-step').forEach((step) => {
+      ScrollTrigger.create({
+        trigger: step,
+        start: 'top center',
+        end: 'bottom center',
+        onToggle: (self) => {
+          if (self.isActive) setActive(Number(step.dataset.index));
+        },
+      });
+    });
+  });
+</script>

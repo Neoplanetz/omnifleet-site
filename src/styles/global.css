@@ -20,6 +20,11 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 3.5rem;
 }
+
+/* Hangul headlines: never break inside a word */
+:lang(ko) :is(h1, h2, h3) {
+  word-break: keep-all;
+}
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

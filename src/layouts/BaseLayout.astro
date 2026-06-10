@@ -36,6 +36,7 @@ const path = locale === 'en' ? '/en/' : '/';
   <body class="bg-ink font-sans text-body antialiased">
     <SiteHeader locale={locale} dict={dict} />
     <main><slot /></main>
+    <footer class="border-t border-line/60 px-6 py-10 text-center font-mono text-xs text-body/80">{dict.cta.copyright}</footer>
     <script>
       // Scroll reveal: one observer for all .reveal elements.
       const revealObserver = new IntersectionObserver(

@@ -1,0 +1,44 @@
+---
+import type { Dict } from '../i18n';
+
+interface Props {
+  dict: Dict;
+}
+const { dict } = Astro.props;
+const ROBOTS = ['robot_0', 'robot_1', 'robot_2', 'robot_3'];
+---
+
+<section class="mx-auto max-w-6xl px-6 py-32">
+  <p class="reveal font-mono text-xs tracking-[0.3em] text-accent uppercase">{dict.env.eyebrow}</p>
+  <h2 class="reveal mt-4 max-w-2xl font-display text-4xl font-bold text-bright text-balance lg:text-5xl">
+    {dict.env.title}
+  </h2>
+  <p class="reveal mt-6 max-w-2xl text-lg leading-relaxed">{dict.env.body}</p>
+
+  <div class="reveal mt-16 grid items-stretch gap-4 lg:grid-cols-[1fr_minmax(3rem,6rem)_1fr_minmax(3rem,6rem)_1fr]">
+    <div class="rounded-xl border border-line bg-panel/60 p-5">
+      <p class="font-mono text-[10px] tracking-[0.3em] text-accent uppercase">{dict.env.diagram.robots}</p>
+      <div class="mt-4 grid grid-cols-2 gap-2">
+        {ROBOTS.map((r) => (
+          <span class="rounded-md border border-line bg-ink px-2 py-1.5 text-center font-mono text-xs text-bright">{r}</span>
+        ))}
+      </div>
+    </div>
+    <div class="diagram-link self-center" aria-hidden="true"></div>
+    <div class="flex flex-col justify-center rounded-xl border border-accent/40 bg-panel/60 p-5 text-center">
+      <p class="font-mono text-[10px] tracking-[0.3em] text-accent uppercase">{dict.env.diagram.bridge}</p>
+      <p class="mt-2 font-mono text-xs">WebSocket :9090</p>
+    </div>
+    <div class="diagram-link self-center" aria-hidden="true"></div>
+    <div class="flex flex-col justify-center rounded-xl border border-line bg-panel/60 p-5 text-center">
+      <p class="font-mono text-[10px] tracking-[0.3em] text-accent uppercase">{dict.env.diagram.browser}</p>
+      <p class="mt-2 text-sm font-semibold text-bright">Omnifleet</p>
+    </div>
+  </div>
+
+  <div class="reveal mt-10 flex flex-wrap gap-2">
+    {dict.env.chips.map((chip) => (
+      <span class="rounded-full border border-line px-3 py-1.5 font-mono text-xs">{chip}</span>
+    ))}
+  </div>
+</section>

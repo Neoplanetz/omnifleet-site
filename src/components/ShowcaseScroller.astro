@@ -18,7 +18,7 @@ const features = dict.showcase.features.map((f, i) => ({ ...f, ...MEDIA[i] }));
 
 <section id="showcase" class="relative">
   <!-- Desktop + motion-ok: sticky stage with index-driven crossfade -->
-  <div class="hidden lg:motion-safe:block">
+  <div class="showcase-sticky-variant hidden lg:motion-safe:block">
     <div class="relative" style={`height: ${features.length * 100}vh`}>
       <div class="sticky top-0 flex h-svh items-center overflow-hidden">
         <div class="mx-auto grid w-[min(92vw,1400px)] grid-cols-[minmax(0,2fr)_minmax(0,3fr)] items-center gap-12 px-6">
@@ -59,7 +59,7 @@ const features = dict.showcase.features.map((f, i) => ({ ...f, ...MEDIA[i] }));
   </div>
 
   <!-- Mobile, or any reduced-motion environment: plain stacked sections -->
-  <div class="space-y-24 px-6 py-24 lg:motion-safe:hidden">
+  <div class="showcase-stacked-variant space-y-24 px-6 py-24 lg:motion-safe:hidden">
     {features.map((f) => (
       <div class="reveal mx-auto max-w-xl">
         <p class="font-mono text-xs tracking-[0.3em] text-accent uppercase">{f.kicker}</p>

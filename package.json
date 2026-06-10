@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "npm run check:i18n && astro build",
+    "build": "npm run check:i18n && npm run check:types && astro build",
+    "check:types": "tsc --noEmit",
     "preview": "astro preview",
     "check:i18n": "tsx scripts/check-i18n-parity.ts"
   },
@@ -18,8 +19,10 @@
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.0",
+    "@types/node": "^25.9.2",
     "playwright": "^1.50.0",
     "tailwindcss": "^4.1.0",
-    "tsx": "^4.19.0"
+    "tsx": "^4.19.0",
+    "typescript": "^5.9.3"
   }
 }

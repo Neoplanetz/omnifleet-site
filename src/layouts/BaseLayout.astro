@@ -31,6 +31,8 @@ const path = locale === 'en' ? '/en/' : '/';
     <meta property="og:url" content={site + path} />
     <meta property="og:image" content={site + '/posters/hero.jpg'} />
     <meta name="twitter:card" content="summary_large_image" />
+    <!-- Preload hero poster so LCP image is fetched early -->
+    <link rel="preload" as="image" href="/posters/hero.jpg" />
     <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
   </head>
   <body class="bg-ink font-sans text-body antialiased">

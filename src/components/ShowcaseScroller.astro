@@ -40,7 +40,7 @@ const features = dict.showcase.features.map((f, i) => ({ ...f, ...MEDIA[i] }));
                 muted
                 loop
                 playsinline
-                preload={i === 0 ? 'auto' : 'metadata'}
+                preload="none"
                 aria-hidden="true"
               >
                 <source src={`/videos/${f.id}.webm`} type="video/webm" />

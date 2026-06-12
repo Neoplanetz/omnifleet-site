@@ -9,7 +9,7 @@ const { locale, dict } = Astro.props;
 const homeHref = locale === 'ko' ? '/' : '/en/';
 const langHref = locale === 'ko' ? '/en/' : '/';
 const otherLocale = locale === 'ko' ? 'en' : 'ko';
-const mailHref = `mailto:ketimoro@gmail.com?subject=${encodeURIComponent(dict.cta.mailSubject)}`;
+const mailHref = `mailto:neoplanetz@gmail.com?subject=${encodeURIComponent(dict.cta.mailSubject)}`;
 ---
 
 <header class="fixed inset-x-0 top-0 z-50 border-b border-line/50 bg-ink/65 backdrop-blur-md">

@@ -39,17 +39,43 @@ export const en = {
     ],
   },
   stats: [
-    { value: '4+', label: 'robots controlled at once' },
+    { value: '10+', label: 'robots controlled at once' },
     { value: '0', label: 'installs — just a browser' },
     { value: '60min', label: 'continuous recording' },
-    { value: '2', label: 'map source modes' },
+    { value: '24/7', label: 'anomaly watch' },
   ],
+  intel: {
+    eyebrow: 'INTELLIGENT OPERATIONS',
+    title: 'The system watches. You decide.',
+    anomaly: {
+      kicker: 'Live anomaly detection',
+      title: 'Anomalies have nowhere to hide.',
+      body: "Low battery, emergency stops, degraded localization confidence — every robot’s telemetry is monitored in real time, and anomalies are flagged the moment they appear. Even when no one is watching the screen.",
+      alerts: [
+        { level: 'critical', title: 'Emergency stop — robot_0', meta: '12s ago · emg_state = 1' },
+        { level: 'warning', title: 'Low battery — robot_2', meta: 'battery 18% · threshold 20%' },
+        { level: 'warning', title: 'Localization confidence drop — robot_3', meta: 'converged = false' },
+      ],
+    },
+    copilot: {
+      kicker: 'Fleet copilot',
+      title: 'Just ask your fleet.',
+      body: 'The fleet copilot reads live fleet data and answers in plain language. Robot status, task progress, anomalies — ask in one line instead of digging through dashboards.',
+      chat: [
+        { role: 'user', text: 'How is robot_2 doing?' },
+        { role: 'bot', text: 'robot_2 is running pickup-4 → delivery-21. Battery 71%, localization healthy, no anomalies in the last 5 minutes.' },
+        { role: 'user', text: 'Which robot has the lowest battery?' },
+        { role: 'bot', text: 'robot_0 at 23% — about 40 minutes of runtime left. I recommend returning it to the charging station.' },
+      ],
+      hint: 'Summon anywhere with Ctrl + /',
+    },
+  },
   grid: {
     eyebrow: 'AND MORE',
     title: 'Everything else a control room needs.',
     items: [
-      { title: 'AI copilot', body: 'Ask about fleet status in plain language. The fastest way to read your telemetry.' },
-      { title: 'Live event alerts', body: 'Low battery, emergency stops, and localization loss detected and announced instantly.' },
+      { title: 'Live camera', body: "Stream each robot’s onboard camera right in cards and on the map." },
+      { title: 'Task monitoring', body: 'Track per-robot task assignment, progress, and history in real time.' },
       { title: 'Operations log', body: 'Task progress and events recorded and filterable per robot.' },
       { title: 'Operator accounts', body: 'Per-operator login and account management. Clean handovers across shifts.' },
       { title: 'KO / EN interface', body: 'Operators switch the dashboard language themselves.' },

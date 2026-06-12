@@ -1,0 +1,58 @@
+---
+import type { Dict } from '../i18n';
+
+interface Props {
+  dict: Dict;
+}
+const { dict } = Astro.props;
+const { intel } = dict;
+---
+
+<section class="mx-auto max-w-6xl px-6 py-32">
+  <p class="reveal text-center font-mono text-xs tracking-[0.3em] text-accent uppercase">{intel.eyebrow}</p>
+  <h2 class="reveal mx-auto mt-4 max-w-3xl text-center font-display text-4xl font-bold text-bright text-balance lg:text-5xl">
+    {intel.title}
+  </h2>
+
+  <div class="mt-16 grid gap-6 lg:grid-cols-2">
+    <div class="reveal flex flex-col rounded-2xl border border-line bg-panel/40 p-8">
+      <p class="font-mono text-xs tracking-[0.3em] text-accent uppercase">{intel.anomaly.kicker}</p>
+      <h3 class="mt-3 font-display text-2xl font-bold text-bright text-balance lg:text-3xl">{intel.anomaly.title}</h3>
+      <p class="mt-3 leading-relaxed">{intel.anomaly.body}</p>
+      <div class="mt-8 space-y-3" aria-hidden="true">
+        {intel.anomaly.alerts.map((alert) => (
+          <div
+            class={`rounded-lg border-l-2 px-4 py-3 ${
+              alert.level === 'critical' ? 'border-red-400 bg-red-400/10' : 'border-amber-300 bg-amber-300/10'
+            }`}
+          >
+            <p class={`text-sm font-semibold ${alert.level === 'critical' ? 'text-red-300' : 'text-amber-200'}`}>
+              {alert.title}
+            </p>
+            <p class="mt-1 font-mono text-xs text-body/90">{alert.meta}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="reveal flex flex-col rounded-2xl border border-line bg-panel/40 p-8">
+      <p class="font-mono text-xs tracking-[0.3em] text-accent uppercase">{intel.copilot.kicker}</p>
+      <h3 class="mt-3 font-display text-2xl font-bold text-bright text-balance lg:text-3xl">{intel.copilot.title}</h3>
+      <p class="mt-3 leading-relaxed">{intel.copilot.body}</p>
+      <div class="mt-8 flex flex-1 flex-col gap-3" aria-hidden="true">
+        {intel.copilot.chat.map((message) => (
+          <div
+            class={`max-w-[85%] rounded-xl px-4 py-3 text-sm leading-relaxed ${
+              message.role === 'user'
+                ? 'self-end rounded-br-sm border border-accent/30 bg-accent/10 text-bright'
+                : 'self-start rounded-bl-sm border border-line bg-ink/60'
+            }`}
+          >
+            {message.text}
+          </div>
+        ))}
+      </div>
+      <p class="mt-6 self-start rounded-full border border-line px-3 py-1.5 font-mono text-xs">{intel.copilot.hint}</p>
+    </div>
+  </div>
+</section>

@@ -39,17 +39,43 @@ export const ko = {
     ],
   },
   stats: [
-    { value: '4+', label: '동시 관제 로봇' },
+    { value: '10+', label: '동시 관제 로봇' },
     { value: '0', label: '설치 — 브라우저만으로' },
     { value: '60분', label: '연속 운행 녹화' },
-    { value: '2', label: '지도 소스 모드' },
+    { value: '24/7', label: '이상 신호 감시' },
   ],
+  intel: {
+    eyebrow: 'INTELLIGENT OPERATIONS',
+    title: '지켜보는 건 시스템. 결정하는 건 운영자.',
+    anomaly: {
+      kicker: '실시간 이상 신호 감지',
+      title: '이상 신호는 숨지 못합니다.',
+      body: '배터리 부족, 긴급 정지, 위치추정 신뢰도 저하 — 모든 로봇의 텔레메트리를 실시간으로 감시해 이상 신호를 즉시 감지하고 알립니다. 운영자가 화면을 보고 있지 않아도.',
+      alerts: [
+        { level: 'critical', title: '긴급 정지 — robot_0', meta: '12초 전 · emg_state = 1' },
+        { level: 'warning', title: '배터리 부족 — robot_2', meta: '배터리 18% · 임계값 20%' },
+        { level: 'warning', title: '위치추정 신뢰도 저하 — robot_3', meta: 'converged = false' },
+      ],
+    },
+    copilot: {
+      kicker: '관제 파일럿',
+      title: '플릿에게 직접 물어보세요.',
+      body: '관제 파일럿이 실시간 플릿 데이터를 읽고 자연어로 답합니다. 로봇 상태, 작업 진행, 이상 징후까지 — 대시보드를 뒤지는 대신 한 줄로 질문하세요.',
+      chat: [
+        { role: 'user', text: 'robot_2 지금 상태 어때?' },
+        { role: 'bot', text: 'robot_2는 픽업-4 → 배달-21 작업을 운행 중입니다. 배터리 71%, 위치추정 정상, 최근 5분간 이상 신호 없음.' },
+        { role: 'user', text: '배터리 가장 낮은 로봇은?' },
+        { role: 'bot', text: 'robot_0이 23%로 가장 낮습니다. 약 40분 운행 가능 — 충전 스테이션 복귀를 권장합니다.' },
+      ],
+      hint: 'Ctrl + / 로 어디서든 호출',
+    },
+  },
   grid: {
     eyebrow: 'AND MORE',
     title: '관제실에 필요한 나머지 전부.',
     items: [
-      { title: 'AI 코파일럿', body: '플릿 상태를 자연어로 묻고 답을 받습니다. 관제 데이터를 읽는 가장 빠른 방법.' },
-      { title: '실시간 이벤트 알림', body: '배터리 부족, 긴급정지, 위치추정 이상을 즉시 감지해 알립니다.' },
+      { title: '실시간 카메라', body: '로봇 탑재 카메라 영상을 카드와 지도에서 바로 스트리밍합니다.' },
+      { title: '작업 모니터링', body: '로봇별 작업 할당과 진행률, 수행 이력을 실시간으로 추적합니다.' },
       { title: '관제 로그', body: '작업 진행과 이벤트를 로봇별로 기록하고 필터링합니다.' },
       { title: '운영자 계정', body: '운영자별 로그인과 계정 관리. 교대 근무에도 깔끔하게.' },
       { title: '한/영 운영 UI', body: '관제 화면 언어를 운영자가 직접 전환합니다.' },

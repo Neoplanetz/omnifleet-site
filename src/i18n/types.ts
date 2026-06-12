@@ -16,6 +16,23 @@ export interface Dict {
   };
   showcase: { features: ShowcaseFeature[] };
   stats: { value: string; label: string }[];
+  intel: {
+    eyebrow: string;
+    title: string;
+    anomaly: {
+      kicker: string;
+      title: string;
+      body: string;
+      alerts: { level: 'critical' | 'warning'; title: string; meta: string }[];
+    };
+    copilot: {
+      kicker: string;
+      title: string;
+      body: string;
+      chat: { role: 'user' | 'bot'; text: string }[];
+      hint: string;
+    };
+  };
   grid: {
     eyebrow: string;
     title: string;

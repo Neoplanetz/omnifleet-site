@@ -42,7 +42,7 @@ export const en = {
     { value: '10+', label: 'robots controlled at once' },
     { value: '0', label: 'installs — just a browser' },
     { value: '60min', label: 'continuous recording' },
-    { value: '24/7', label: 'anomaly watch' },
+    { value: '12', label: 'anomaly types detected live' },
   ],
   intel: {
     eyebrow: 'INTELLIGENT OPERATIONS',
@@ -50,7 +50,7 @@ export const en = {
     anomaly: {
       kicker: 'Live anomaly detection',
       title: 'Anomalies have nowhere to hide.',
-      body: "Low battery, emergency stops, degraded localization confidence — every robot’s telemetry is monitored in real time, and anomalies are flagged the moment they appear. Even when no one is watching the screen.",
+      body: "From low battery, emergency stops, and localization loss to stuck robots and delayed tasks — 12 types of anomaly signals are detected and flagged in real time. Even when no one is watching the screen.",
       alerts: [
         { level: 'critical', title: 'Emergency stop — robot_0', meta: '12s ago · emg_state = 1' },
         { level: 'warning', title: 'Low battery — robot_2', meta: 'battery 18% · threshold 20%' },

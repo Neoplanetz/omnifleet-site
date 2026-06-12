@@ -42,7 +42,7 @@ export const ko = {
     { value: '10+', label: '동시 관제 로봇' },
     { value: '0', label: '설치 — 브라우저만으로' },
     { value: '60분', label: '연속 운행 녹화' },
-    { value: '24/7', label: '이상 신호 감시' },
+    { value: '12종', label: '실시간 이상 신호 감지' },
   ],
   intel: {
     eyebrow: 'INTELLIGENT OPERATIONS',
@@ -50,7 +50,7 @@ export const ko = {
     anomaly: {
       kicker: '실시간 이상 신호 감지',
       title: '이상 신호는 숨지 못합니다.',
-      body: '배터리 부족, 긴급 정지, 위치추정 신뢰도 저하 — 모든 로봇의 텔레메트리를 실시간으로 감시해 이상 신호를 즉시 감지하고 알립니다. 운영자가 화면을 보고 있지 않아도.',
+      body: '배터리 부족, 긴급 정지, 위치 추정 실패부터 정체와 작업 지연까지 — 12종의 이상 신호를 실시간으로 감지해 즉시 알립니다. 운영자가 화면을 보고 있지 않아도.',
       alerts: [
         { level: 'critical', title: '긴급 정지 — robot_0', meta: '12초 전 · emg_state = 1' },
         { level: 'warning', title: '배터리 부족 — robot_2', meta: '배터리 18% · 임계값 20%' },
